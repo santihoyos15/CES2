@@ -4,4 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>ControladorServlet</servlet-name>
+    <servlet-class>ces3.controladores.ControladorServlet</servlet-class>
+  </servlet>
+
+  <!-- Map the servlet to a URL pattern -->
+  <servlet-mapping>
+    <servlet-name>ControladorServlet</servlet-name>
+    <url-pattern>/ControladorServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
+
