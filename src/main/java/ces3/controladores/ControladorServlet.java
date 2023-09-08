@@ -39,7 +39,7 @@ public class ControladorServlet extends HttpServlet {
             List<Persona> trabajadores;
 
             if (session.isNew()) {
-             trabajadores = (List<Persona>) session.getAttribute("trabajadores");
+                trabajadores = (List<Persona>) session.getAttribute("trabajadores");
             } else {
                 trabajadores = new ArrayList<>();
             }

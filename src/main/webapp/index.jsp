@@ -1,7 +1,5 @@
 <%@ page import="ces3.entidades.Persona" %>
 <%@ page import="java.util.List" %>
-<%@ page import="ces3.entidades.Empleado" %>
-<%@ page import="ces3.entidades.Contratista" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,22 +11,11 @@
     <%
         List<Persona> trabajadores = (List<Persona>) request.getAttribute("trabajadores");
 
-        Empleado empleado;
-        Contratista contratista;
-
         if (trabajadores != null) {
             for (Persona persona : trabajadores) {
-                if (persona instanceof Empleado) {
-                    empleado = (Empleado) persona;
     %>
-                    <span><%= empleado.aumentarSalario(30)%></span>
+                <span><%= persona.ascender(30)%></span>
     <%
-                } else if (persona instanceof Contratista) {
-                    contratista = (Contratista) persona;
-    %>
-                    <span><%= contratista.aumentarSalario(30)%></span>
-    <%
-                }
             }
         }
     %>

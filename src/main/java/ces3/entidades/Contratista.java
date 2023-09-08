@@ -1,18 +1,15 @@
 package ces3.entidades;
 
-import java.io.Serializable;
-
-public class Contratista extends Persona implements Pago, Serializable {
+public class Contratista extends Persona {
     public Contratista(String nombre) {
         super(nombre);
     }
 
-    @Override
     public String aumentarSalario(int porcentaje) {
-        if (porcentaje > Pago.TOPE_AUMENTO) {
-            return "Lo sentimos. No es posible aumentar el pago por encima del tope '" + Pago.TOPE_AUMENTO + "'";
+        if (porcentaje > this.TOPE_AUMENTO) {
+            return "Lo sentimos. No es posible aumentar el pago por hora por encima de " + this.TOPE_AUMENTO + "% a " + this.getNombre() + "<br/>";
         }
 
-        return "Aumentando el salario en " + porcentaje + "% a " + this.getNombre();
+        return "Aumentando el pago por hora en " + porcentaje + "% a " + this.getNombre() + "<br/>";
     }
 }
