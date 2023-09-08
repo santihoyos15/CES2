@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-//import javax.ejb.Stateful;
+import javax.ejb.Stateful;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Stateful(passivationCapable=false)
+@Stateful(passivationCapable=false)
 // @WebServlet(name = "ControladorServlet", value = "/ControladorServlet")
 public class ControladorServlet extends HttpServlet {
 
@@ -36,11 +36,9 @@ public class ControladorServlet extends HttpServlet {
 
             HttpSession session = request.getSession(true);
 
-            List<Persona> trabajadores;
+            List<Persona> trabajadores = (List<Persona>) session.getAttribute("trabajadores");
 
-            if (session.isNew()) {
-                trabajadores = (List<Persona>) session.getAttribute("trabajadores");
-            } else {
+            if (trabajadores == null) {
                 trabajadores = new ArrayList<>();
             }
 
