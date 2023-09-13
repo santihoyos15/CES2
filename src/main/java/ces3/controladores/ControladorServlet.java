@@ -1,11 +1,10 @@
 package ces3.controladores;
 
-import ces3.entidades.Contratista;
-import ces3.entidades.Empleado;
-import ces3.entidades.Persona;
+import ces3.entidades.Avion;
+import ces3.entidades.Barco;
+import ces3.entidades.Camion;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,42 +16,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Stateful(passivationCapable=false)
-// @WebServlet(name = "ControladorServlet", value = "/ControladorServlet")
 public class ControladorServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()){
-            String nombre = request.getParameter("username");
-            String tipo = request.getParameter("tipoEmpleado");
+            String nombre = request.getParameter("nombre");
+            String tipoVehiculo = request.getParameter("tipoVehiculo");
 
-            boolean isAnyRequiredFieldEmpty = nombre == null || nombre.isEmpty() || tipo == null || tipo.isEmpty();
+            boolean isAnyRequiredFieldEmpty = nombre == null || nombre.isEmpty() || tipoVehiculo == null || tipoVehiculo.isEmpty();
 
             if (isAnyRequiredFieldEmpty) {
-                out.println("El nombre y el tipo de empleado son requeridos");
+                out.println("El nombre y el tipo de vehiculo son requeridos");
                 return;
             }
 
             HttpSession session = request.getSession(true);
 
-            List<Persona> trabajadores = (List<Persona>) session.getAttribute("trabajadores");
+            List<Object> vehiculos = (List<Object>) session.getAttribute("vehiculos");
 
-            if (trabajadores == null) {
-                trabajadores = new ArrayList<>();
+            if (vehiculos == null) {
+                vehiculos = new ArrayList<>();
             }
 
-            if (tipo.equals("1")) {
-                Empleado empleado = new Empleado(nombre);
-                trabajadores.add(empleado);
-            } else if (tipo.equals("2")) {
-                Contratista contratista = new Contratista(nombre);
-                trabajadores.add(contratista);
+            switch (tipoVehiculo) {
+                case "1":
+                    Avion avion = new Avion();
+                    avion.setNombre(nombre);
+                    vehiculos.add(avion);
+                    break;
+                case "2":
+                    Barco barco = new Barco();
+                    barco.setNombre(nombre);
+                    vehiculos.add(barco);
+                    break;
+                case "3":
+                    Camion camion = new Camion();
+                    camion.setNombre(nombre);
+                    vehiculos.add(camion);
+                    break;
             }
 
-            session.setAttribute("trabajadores", trabajadores);
+            session.setAttribute("vehiculos", vehiculos);
 
-            request.setAttribute("trabajadores", trabajadores);
+            request.setAttribute("vehiculos", vehiculos);
             request.getRequestDispatcher("index.jsp")
                     .forward(request, response);
         }
