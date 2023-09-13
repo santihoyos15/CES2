@@ -1,6 +1,6 @@
 package ces3.entidades;
 
-public class Camion implements VehiculoCarga, Localizable {
+public class Camion extends Vehiculo {
     String nombre;
     int carga = 0;
 
@@ -11,7 +11,7 @@ public class Camion implements VehiculoCarga, Localizable {
     @Override
     public String cargar(int carga) {
         this.carga += carga;
-        return "Camion cargado con" + this.carga + "toneladas.";
+        return "Camion " + this.nombre + " cargado con " + this.carga + " toneladas.";
     }
     @Override
     public String localizar() {

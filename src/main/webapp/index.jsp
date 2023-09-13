@@ -9,22 +9,14 @@
     </head>
 <body>
     <%
-        List<Object> vehiculos = (List<Object>) request.getAttribute("vehiculos");
+        List<Vehiculo> vehiculos = (List<Vehiculo>) request.getAttribute("vehiculos");
 
         if (vehiculos != null) {
-            for (Object vehiculo : vehiculos) {
-                if (vehiculo instanceof VehiculoCarga) {
+            for (Vehiculo vehiculo : vehiculos) {
     %>
-                    <span><%= ((VehiculoCarga) vehiculo).cargar(30) %></span><br/>
+                    <span><%= vehiculo.cargar(30) %></span><br/>
+                    <span><%= vehiculo.localizar() %></span><br/>
     <%
-                }
-
-                if (vehiculo instanceof Localizable) {
-    %>
-                    <span><%= ((Localizable) vehiculo).localizar() %></span><br/>
-    <%
-                }
-
                 if (vehiculo instanceof Avion) {
     %>
                     <span><%= ((Avion) vehiculo).volar() %></span><br/>
@@ -39,9 +31,13 @@
 
                 if (vehiculo instanceof Camion) {
     %>
-                    <span><%= ((Camion) vehiculo).iniciarRuta() %></span><br/><br/>
+                    <span><%= ((Camion) vehiculo).iniciarRuta() %></span>
     <%
                 }
+
+    %>
+                <br/>
+    <%
             }
         }
     %>
