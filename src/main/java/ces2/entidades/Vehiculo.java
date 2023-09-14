@@ -1,4 +1,4 @@
-package ces3.entidades;
+package ces2.entidades;
 
 public abstract class Vehiculo {
     public abstract String cargar (int carga);

@@ -1,8 +1,8 @@
-package ces3.controladores;
+package ces2.controladores;
 
-import ces3.entidades.Avion;
-import ces3.entidades.Barco;
-import ces3.entidades.Camion;
+import ces2.entidades.Avion;
+import ces2.entidades.Barco;
+import ces2.entidades.Camion;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="ces3.entidades.*" %>
+<%@ page import="ces2.entidades.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

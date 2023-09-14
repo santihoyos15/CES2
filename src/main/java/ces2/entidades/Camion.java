@@ -1,4 +1,4 @@
-package ces3.entidades;
+package ces2.entidades;
 
 public class Camion extends Vehiculo {
     String nombre;
