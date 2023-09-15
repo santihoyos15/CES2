@@ -10,8 +10,8 @@ public class Barco implements VehiculoCarga, Localizable {
 
     @Override
     public String cargar(int carga) {
-        this.carga += carga;
-        return "Barco cargado con" + this.carga + "toneladas.";
+        this.carga = carga;
+        return "Barco cargado con " + this.carga + "toneladas.";
     }
 
     @Override
