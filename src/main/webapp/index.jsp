@@ -15,28 +15,7 @@
             for (Vehiculo vehiculo : vehiculos) {
     %>
                     <span><%= vehiculo.cargar(30) %></span><br/>
-                    <span><%= vehiculo.localizar() %></span><br/>
-    <%
-                if (vehiculo instanceof Avion) {
-    %>
-                    <span><%= ((Avion) vehiculo).volar() %></span><br/>
-    <%
-                }
-
-                if (vehiculo instanceof Barco) {
-    %>
-                    <span><%= ((Barco) vehiculo).navegar() %></span><br/>
-    <%
-                }
-
-                if (vehiculo instanceof Camion) {
-    %>
-                    <span><%= ((Camion) vehiculo).iniciarRuta() %></span>
-    <%
-                }
-
-    %>
-                <br/>
+                    <span><%= vehiculo.localizar() %></span><br/><br/>
     <%
             }
         }
