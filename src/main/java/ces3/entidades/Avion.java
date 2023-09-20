@@ -11,7 +11,7 @@ public class Avion implements VehiculoCarga, Localizable {
     @Override
     public String cargar(int carga) {
         this.carga = carga;
-        return "Avión cargado con" + this.carga + "toneladas.";
+        return "Avión cargado con " + this.carga + " toneladas.";
     }
 
     @Override
