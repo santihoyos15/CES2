@@ -6,14 +6,25 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-    <servlet-name>ControladorServlet</servlet-name>
-    <servlet-class>ces2.controladores.ControladorServlet</servlet-class>
+    <servlet-name>Servlet1</servlet-name>
+    <servlet-class>ces2.controladores.Servlet1</servlet-class>
   </servlet>
 
   <!-- Map the servlet to a URL pattern -->
   <servlet-mapping>
-    <servlet-name>ControladorServlet</servlet-name>
-    <url-pattern>/ControladorServlet</url-pattern>
+    <servlet-name>Servlet1</servlet-name>
+    <url-pattern>/Servlet1</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Servlet2</servlet-name>
+    <servlet-class>ces2.controladores.Servlet2</servlet-class>
+  </servlet>
+
+  <!-- Map the servlet to a URL pattern -->
+  <servlet-mapping>
+    <servlet-name>Servlet2</servlet-name>
+    <url-pattern>/Servlet2</url-pattern>
   </servlet-mapping>
 </web-app>
 
