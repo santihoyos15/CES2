@@ -33,8 +33,12 @@ public class Servlet1 extends HttpServlet {
             String nombre = request.getParameter("nombre");
             String tipoEmpleado = request.getParameter("tipoEmpleado");
             String porcentajeAumento = request.getParameter("porcentajeAumento");
+            String duracionContratoMeses = request.getParameter("duracionContratoMeses");
 
-            if (nombre == null || nombre.trim().isEmpty() || porcentajeAumento == null || porcentajeAumento.isEmpty()) {
+            if (nombre == null || nombre.trim().isEmpty() ||
+                porcentajeAumento == null || porcentajeAumento.isEmpty() ||
+                duracionContratoMeses == null || duracionContratoMeses.isEmpty()
+            ) {
                 request.setAttribute("mensaje", "Se debe ingresar el nombre, el tipo y el aumento.");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 return;
@@ -59,10 +63,10 @@ public class Servlet1 extends HttpServlet {
             }
 
             if (tipoEmpleado.equals("1")) {
-                Empleado empleado = new Empleado(id, nombre);
+                Empleado empleado = new Empleado(id, nombre, Integer.parseInt(duracionContratoMeses));
                 trabajadores.add(empleado);
             } else if (tipoEmpleado.equals("2")) {
-                Contratista contratista = new Contratista(id, nombre);
+                Contratista contratista = new Contratista(id, nombre, Integer.parseInt(duracionContratoMeses));
                 trabajadores.add(contratista);
             }
 

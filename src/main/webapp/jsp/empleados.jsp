@@ -21,6 +21,7 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Dias libres</th>
+                            <th>Duración del contrato</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,6 +30,7 @@
                             <td><c:out value="${persona.getId()}" /></td>
                             <td><c:out value="${persona.getNombre()}" /></td>
                             <td><c:out value="${persona.getDiasLibres()}" /></td>
+                            <td><c:out value="${persona.duracionContratoMeses}" /></td>
                             <td>
                                 <form action="Servlet2" method="POST">
                                 <input type="hidden" name="formulario" value="empleados">

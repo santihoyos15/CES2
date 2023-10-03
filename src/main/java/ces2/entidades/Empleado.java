@@ -2,8 +2,8 @@ package ces2.entidades;
 
 public class Empleado extends Persona {
 
-    public Empleado(int id, String nombre) {
-        super(id, nombre);
+    public Empleado(int id, String nombre, int duracionContratoMeses) {
+        super(id, nombre, duracionContratoMeses);
     }
 
     @Override

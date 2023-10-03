@@ -3,14 +3,18 @@ package ces2.entidades;
 public abstract class Persona {
     public final int TOPE_AUMENTO = 5;
     public final int TOPE_DIAS = 3;
+    public final int MAXIMA_DURACION_CONTRATO_MESES = 6;
 
     private int id;
     private String nombre;
     private Integer diasLibres;
+    public Integer duracionContratoMeses;
 
-    public Persona(int id, String nombre) {
+    // todo you're done, just make sure new changes work
+    public Persona(int id, String nombre, int duracionContratoMeses) {
         this.id = id;
         this.nombre = nombre;
+        this.duracionContratoMeses = duracionContratoMeses;
     }
 
     public abstract String aumentarSalario (int porcentajeAumento);
@@ -60,5 +64,13 @@ public abstract class Persona {
         this.diasLibres = diasLibres;
         return "OK";
 
+    }
+
+    public Integer getDuracionContratoMeses() {
+        return duracionContratoMeses;
+    }
+
+    public void setDuracionContratoMeses(Integer duracionContratoMeses) {
+        this.duracionContratoMeses = duracionContratoMeses;
     }
 }

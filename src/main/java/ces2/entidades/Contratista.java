@@ -2,8 +2,8 @@ package ces2.entidades;
 
 public class Contratista extends Persona {
 
-    public Contratista(int id, String nombre) {
-        super(id, nombre);
+    public Contratista(int id, String nombre, int duracionContratoMeses) {
+        super(id, nombre, duracionContratoMeses);
     }
 
     @Override

@@ -44,6 +44,18 @@
                 <option value="2">Contratista</option>
             </select>
 
+            <br>
+            <label for="duracionContratoMeses">Duración del contrato en meses</label>
+            <input
+                id="duracionContratoMeses"
+                name="duracionContratoMeses"
+                placeholder="Duracion contrato en meses"
+                type="number"
+                value="1"
+                min="1"
+                style="width: 3em"
+            >
+
             <br/><br/>
 
             <label for="porcentajeAumento">Porcentaje Aumento</label>
