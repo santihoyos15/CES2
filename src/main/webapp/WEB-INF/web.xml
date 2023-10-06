@@ -7,7 +7,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
   <servlet>
     <servlet-name>Servlet1</servlet-name>
-    <servlet-class>ces2.controladores.Servlet1</servlet-class>
+    <servlet-class>ces2.servlets.Servlet1</servlet-class>
   </servlet>
 
   <!-- Map the servlet to a URL pattern -->
@@ -16,15 +16,5 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <url-pattern>/Servlet1</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-    <servlet-name>Servlet2</servlet-name>
-    <servlet-class>ces2.controladores.Servlet2</servlet-class>
-  </servlet>
-
-  <!-- Map the servlet to a URL pattern -->
-  <servlet-mapping>
-    <servlet-name>Servlet2</servlet-name>
-    <url-pattern>/Servlet2</url-pattern>
-  </servlet-mapping>
 </web-app>
 

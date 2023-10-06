@@ -1,85 +1,53 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Hello World!</title>
-    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <title>JSP Page</title>
 </head>
 <body>
-    <c:if test="${(not empty trabajadores)}">
-        <fmt:parseNumber var="aumento" value="${porcentajeAumento}" integerOnly="true" />
-
-        <c:forEach var="persona" items="${trabajadores}">
-            <span style="white-space: pre;"><c:out escapeXml="false" value="${persona.ascender(porcentajeAumento)}" /></span><br/>
-            <br/>
-        </c:forEach>
-    </c:if>
-
-    <br/><br/>
-
-    <h2>Ingrese aqu&iacute;</h2>
-    <div class="error-message">
-        <c:if test="${not empty mensaje}">
-            <c:out value="${mensaje}" />
-            <br /><br />
-        </c:if>
-    </div>
-
+<div align="center">
+    <h1>El gran banco</h1>
+    <br />
+    <!-- Formulario para crear una nueva cuenta -->
     <form action="Servlet1" method="POST">
-        <fieldset>
-            <legend>Nuevo empleado:</legend>
-            <label for="nombre">Nombre de Usuario</label>
-            <br>
-            <input id="nombre" name="nombre" type="text" placeholder="Nombre de usuario">
-
-            <br>
-            <br>
-
-            <label for="tipoEmpleado">Tipo de empleado</label>
-            <select id="tipoEmpleado" name="tipoEmpleado">
-                <option value="1">Empleado</option>
-                <option value="2">Contratista</option>
-            </select>
-
-            <br>
-            <label for="duracionContratoMeses">Duración del contrato en meses</label>
-            <input
-                id="duracionContratoMeses"
-                name="duracionContratoMeses"
-                placeholder="Duracion contrato en meses"
-                type="number"
-                value="1"
-                min="1"
-                style="width: 3em"
-            >
-
-            <br/><br/>
-
-            <label for="porcentajeAumento">Porcentaje Aumento</label>
-            <input
-                id="porcentajeAumento"
-                name="porcentajeAumento"
-                type="number"
-                value="1"
-                min="1"
-                style="width: 3em"
-            />
-
-            <br/><br/>
-
-            <input type="hidden" name="formulario" value="index">
-            <button type="submit">Ingresar</button>
-        </fieldset>
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Tipo de Cuenta</th>
+                    <th>Nacionalidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <select name="tipo" size="2">
+                            <option value="ahorros">Ahorros</option>
+                            <option value="corriente">Corriente</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="nacionalidad" size="2">
+                            <option value="local">Local</option>
+                            <option value="extranjero">Extraniero</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr colspan="2">
+                    <td>
+                        <input type="hidden" value="accion1" name="formulario" />
+                        <input type="submit" value="Crear Cuenta" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </form>
 
-    <br /><br />
-
-    <form action="Servlet2" method="POST">
-        <input type="hidden" name="formulario" value="index">
-        Ir a <button type="submit">Empleados</button>
+    <br /> <br />
+    I
+    <!-- Formulario para ir a la ventana cuentas.jsp -->
+    <form action="Servlet1" method="POST">
+        <input type="hidden" value="accion2" name="formulario" /> Ir a:<input type="submit" value="Cuentas" />
     </form>
+</div>
 </body>
 </html>
