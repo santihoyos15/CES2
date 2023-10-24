@@ -61,4 +61,9 @@ public class Banco {
     public HashMap<Integer, CuentaBancaria> getCuentas() {
         return cuentas;
     }
+
+    public void cambiarNacionalidad(boolean esExtranjero, int numeroCuenta) {
+        CuentaBancaria cuentaBancaria = this.cuentas.get(numeroCuenta);
+        cuentaBancaria.setExtranjero(esExtranjero);
+    }
 }

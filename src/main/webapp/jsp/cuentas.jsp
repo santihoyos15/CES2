@@ -26,7 +26,15 @@
                         <tr>
                             <td><c:out value="${cuenta.toString()}"/></td>
                             <br />
-                            <td>...</td>
+                            <td>
+                                <form action="Servlet2" method="POST">
+                                    <input type="hidden" name="cuenta" value="${cuentas.get(cuenta.key).getNumeroCuenta()}" />
+                                    <input type="hidden" name="nacionalidad" value="${cuentas.get(cuenta.key).esExtranjero()}" />
+                                    <input type="hidden" name="balance" value="${cuentas.get(cuenta.key).getBalance()}" />
+                                    <input type="hidden" name="formulario" value="cuentas" />
+                                    <input type="submit" value="Ver" />
+                                </form>
+                            <td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -39,8 +47,8 @@
     <br />
     <br />
     <!-- Formulario para volver a la ventana index.jsp -->
-    <form action="../index.jsp">
-        Ir a: <input type="submit" value="Crear Cuenta" />
+    <form action="index.jsp">
+        Volver a: <input type="submit" value="Crear Cuenta" />
     </form>
 </div>
 </body>

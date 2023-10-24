@@ -21,13 +21,13 @@
                 <tr>
                     <td>
                         <select name="tipo" size="2">
-                            <option value="ahorros">Ahorros</option>
+                            <option value="ahorros" selected>Ahorros</option>
                             <option value="corriente">Corriente</option>
                         </select>
                     </td>
                     <td>
                         <select name="nacionalidad" size="2">
-                            <option value="local">Local</option>
+                            <option value="local" selected>Local</option>
                             <option value="extranjero">Extraniero</option>
                         </select>
                     </td>
@@ -43,7 +43,6 @@
     </form>
 
     <br /> <br />
-    I
     <!-- Formulario para ir a la ventana cuentas.jsp -->
     <form action="Servlet1" method="POST">
         <input type="hidden" value="accion2" name="formulario" /> Ir a:<input type="submit" value="Cuentas" />
