@@ -28,16 +28,16 @@ public class Banco {
         return cuentaBancaria.getNumeroCuenta();
     }
 
-    public int getBalance (int numeroCuenta) {
+    public double getBalance (int numeroCuenta) {
         return cuentas.get(numeroCuenta).getBalance();
     }
 
-    public void depositar (int cantidad, int numeroCuenta) {
+    public void depositar (double cantidad, int numeroCuenta) {
         CuentaBancaria cuenta = cuentas.get(numeroCuenta);
         cuenta.depositar(cantidad);
     }
 
-    public boolean autorizarPrestamo (int cantidad, int numeroCuenta) {
+    public boolean autorizarPrestamo (double cantidad, int numeroCuenta) {
         CuentaBancaria cuenta = cuentas.get(numeroCuenta);
         if (!cuenta.tieneGarantia(cantidad)) {
             return false;
@@ -47,15 +47,17 @@ public class Banco {
         return true;
     }
 
-    public void addInteres (int numeroCuenta) {
+    public boolean addInteres (int numeroCuenta) {
         CuentaBancaria cuenta = cuentas.get(numeroCuenta);
 
         if (!(cuenta instanceof CuentaDeAhorros)) {
-            return;
+            return false;
         }
 
         CuentaDeAhorros cuentaAhorros = (CuentaDeAhorros) cuenta;
         cuentaAhorros.addInteres();
+
+        return true;
     }
 
     public HashMap<Integer, CuentaBancaria> getCuentas() {
@@ -65,5 +67,23 @@ public class Banco {
     public void cambiarNacionalidad(boolean esExtranjero, int numeroCuenta) {
         CuentaBancaria cuentaBancaria = this.cuentas.get(numeroCuenta);
         cuentaBancaria.setExtranjero(esExtranjero);
+    }
+
+    public String imprimirInformacionTodasCuentas () { return "";
+    };
+
+    public String imprimirInformacionUnaCuenta (int numcta) { return "";
+    }
+
+    public String imprimirCuentaConMayorBalance() { return "";
+    };
+
+    public String imprimirCuentaConMenorBalance() { return "";
+    };
+
+    public String mostrarTodosMovimientosCuenta (int numcta) { return "";
+    }
+
+    public String mostrarUltimoMovimientoCuenta (int numcta) { return "";
     }
 }

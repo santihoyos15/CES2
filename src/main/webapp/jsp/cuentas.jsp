@@ -50,6 +50,15 @@
     <form action="index.jsp">
         Volver a: <input type="submit" value="Crear Cuenta" />
     </form>
+
+    <br />
+    <br />
+
+    <form action="Servlet3" method="POST">
+        <input name="formulario" type="hidden" value="accion3" />
+        Ir a: <input type="submit" value="Reportes"/>
+    </form>
+
 </div>
 </body>
 </html>

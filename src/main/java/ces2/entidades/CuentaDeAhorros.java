@@ -3,7 +3,7 @@ package ces2.entidades;
 public class CuentaDeAhorros implements CuentaBancaria{
     private double tasa = 0.01;
     private int numeroCuenta;
-    private int balance = 0;
+    private double balance = 0;
     private boolean esExtranjero = false;
 
     public CuentaDeAhorros(int numeroCuenta) {
@@ -16,7 +16,7 @@ public class CuentaDeAhorros implements CuentaBancaria{
     }
 
     @Override
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
@@ -31,12 +31,12 @@ public class CuentaDeAhorros implements CuentaBancaria{
     }
 
     @Override
-    public void depositar(int cantidad) {
+    public void depositar(double cantidad) {
         balance += cantidad;
     }
 
     @Override
-    public boolean tieneGarantia(int cantidad) {
+    public boolean tieneGarantia(double cantidad) {
         return balance >= cantidad / 2;
     }
 
@@ -48,5 +48,14 @@ public class CuentaDeAhorros implements CuentaBancaria{
 
     public void addInteres () {
         balance += (int) (balance*tasa);
+    }
+
+    @Override
+    public int compareTo(CuentaBancaria o) {
+        if (this.balance == o.getBalance()) {
+              return this.numeroCuenta - o.getNumeroCuenta();
+        }
+
+        return (int) (this.balance - o.getBalance());
     }
 }

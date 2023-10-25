@@ -1,10 +1,10 @@
 package ces2.entidades;
 
-public interface CuentaBancaria {
+public interface CuentaBancaria extends Comparable<CuentaBancaria> {
     int getNumeroCuenta();
-    int getBalance();
+    double getBalance();
     boolean esExtranjero();
     void setExtranjero(boolean esExtranjero);
-    void depositar(int cantidad);
-    boolean tieneGarantia(int cantidad);
+    void depositar(double cantidad);
+    boolean tieneGarantia(double cantidad);
 }

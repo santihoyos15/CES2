@@ -36,12 +36,12 @@ public class Servlet2 extends HttpServlet {
 
                 if ((!varbalance.trim().isEmpty()) && (varbalance != null)) {
                     if (isNumber(varbalance)) {
-                        if (Integer.parseInt(varbalance) < 0) {
+                        if (Double.parseDouble(varbalance) < 0) {
                             mensaje1 = "La cantidad a depositar deber ser mayor a cero";
                         } else {
-                            banco.depositar(Integer.parseInt(varbalance), Integer.parseInt(varcuenta));
+                            banco.depositar(Double.parseDouble(varbalance), Integer.parseInt(varcuenta));
 
-                            varbalance = Integer.toString(banco.getBalance(Integer.parseInt(varcuenta)));
+                            mensaje1 = "Dinero depositado exitosamente";
                         }
                     } else {
                         mensaje1 = "La cantidad debe ser numerica";
@@ -56,17 +56,13 @@ public class Servlet2 extends HttpServlet {
 
                 if ((!varbalance.trim().isEmpty()) && (varbalance != null)) {
                     if (isNumber(varbalance)) {
-                        if (Integer.parseInt(varbalance) < 0) {
+                        if (Double.parseDouble(varbalance) < 0) {
                             mensaje2 = "La cantidad del prestamo deber ser mayor a cero";
                         } else {
 
-                            boolean resultado = banco.autorizarPrestamo(Integer.parseInt(varbalance), Integer.parseInt(varcuenta));
+                            boolean isPrestamoAutorizado = banco.autorizarPrestamo(Double.parseDouble(varbalance), Integer.parseInt(varcuenta));
 
-                            if (resultado) {
-                                varbalance = Integer.toString(banco.getBalance(Integer.parseInt(varcuenta)));
-                            }
-
-                            mensaje2 = resultado ? "El prestamo fue aprobado" : "No cumple las condiciones";
+                            mensaje2 = isPrestamoAutorizado ? "El prestamo fue aprobado" : "No cumple las condiciones";
                         }
                     } else {
                         mensaje2 = "La cantidad debe ser numerica";
@@ -76,9 +72,14 @@ public class Servlet2 extends HttpServlet {
                 }
 
                 request.setAttribute("mensaje2", mensaje2);
+            } else if (formulario.equals("interes")) {
+                boolean resultado = banco.addInteres(Integer.parseInt(varcuenta));
+
+                String mensaje3 = resultado ? "Se ha sumado el interés a su cuenta" : "Es una cuenta corriente";
+                request.setAttribute("mensaje3", mensaje3);
             }
 
-            // Continue on clase 4-2 1:22:18
+            varbalance = Double.toString(banco.getBalance(Integer.parseInt(varcuenta)));
 
             request.setAttribute("cuenta", varcuenta);
             request.setAttribute("nacionalidad", varnacionalidad);
@@ -89,7 +90,7 @@ public class Servlet2 extends HttpServlet {
 
     public boolean isNumber(String strNum) {
         try {
-            Integer.parseInt(strNum);
+            Double.parseDouble(strNum);
         } catch (NumberFormatException e) {
             return false;
         }

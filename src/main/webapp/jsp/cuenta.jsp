@@ -75,8 +75,22 @@
             </tr>
             <tr>
                 <td>Sumar interes</td>
-                <td></td>
-                <td></td>
+                <td>
+                    <form action="Servlet2" method="POST">
+                        <input type="hidden" name="cuenta" value="${cuenta}" />
+                        <input type="hidden" name="nacionalidad" value="${nacionalidad}" />
+                        <input type="hidden" name="balance" value="${balance}">
+                        <input type="hidden" name="formulario" value="interes" />
+                        <input type="submit" value="Enviar" />
+                    </form>
+                </td>
+                <td>
+                    <c:if test="${not empty mensaje2}">
+                        <p style="color: red;">
+                            <c:out value="${mensaje2}" />
+                        </p>
+                    </c:if>
+                </td>
             </tr>
         </tbody>
     </table>
