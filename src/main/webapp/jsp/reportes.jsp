@@ -21,16 +21,35 @@
         <tbody>
             <tr colspan="2">
                 <td>Máximo balance</td>
-                <td><c:out value="${max.toString()}"/></td>
+                <td><c:out value="${cuentaMayorBalance}"/></td>
             </tr>
             <tr colspan="2">
                 <td>Minimo balance</td>
-                <td><c:out value="${min.toString()}"/></td>
+                <td><c:out value="${cuentaMenorBalance}"/></td>
             </tr>
         </tbody>
     </table>
     <c:if test="${not empty mensaje}">
         <p style="color: red;"><c:out value="${mensaje}" /></p>
+    </c:if>
+
+    <c:if test="${not empty allCuentas}">
+        <h3>Todas las cuentas</h3>
+        <p><c:out escapeXml="false" value="${allCuentas}" /></p>
+    </c:if>
+
+    <br/>
+    <br/>
+
+    <form action="Servlet3" method="POST">
+        <p>Buscar cuenta</p>
+        <input name="numeroCuenta" type="number" placeholder="Número de cuenta"/>
+        <input name="formulario" hidden value="buscarCuenta"/>
+        <input type="submit" value="Buscar Cuenta"/>
+    </form>
+
+    <c:if test="${not empty infoCuenta}">
+        <p><c:out value="${infoCuenta}" /></p>
     </c:if>
 
     <br/>

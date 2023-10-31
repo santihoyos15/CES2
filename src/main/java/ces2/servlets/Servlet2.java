@@ -51,6 +51,26 @@ public class Servlet2 extends HttpServlet {
                 }
 
                 request.setAttribute("mensaje1", mensaje1);
+            } else if (formulario.equals("retirar")) {
+                String mensaje4 = "";
+
+                if ((!varbalance.trim().isEmpty()) && (varbalance != null)) {
+                    if (isNumber(varbalance)) {
+                        if (Double.parseDouble(varbalance) < 0) {
+                            mensaje4 = "La cantidad a retirar deber ser mayor a cero";
+                        } else {
+                            banco.retirar(Double.parseDouble(varbalance), Integer.parseInt(varcuenta));
+
+                            mensaje4 = "Dinero depositado exitosamente";
+                        }
+                    } else {
+                        mensaje4 = "La cantidad debe ser numerica";
+                    }
+                } else {
+                    mensaje4 = "Debe ingresar la cantidad a depositar";
+                }
+
+                request.setAttribute("mensaje4", mensaje4);
             } else if (formulario.equals("prestamo")) {
                 String mensaje2 = "";
 
@@ -84,6 +104,7 @@ public class Servlet2 extends HttpServlet {
             request.setAttribute("cuenta", varcuenta);
             request.setAttribute("nacionalidad", varnacionalidad);
             request.setAttribute("balance", varbalance);
+            request.setAttribute("movimientos", banco.auditoria.mostrarTodosMovimientosCuenta(Integer.parseInt(varcuenta)));
             request.getRequestDispatcher ("jsp/cuenta.jsp").forward (request, response);
         }
     }

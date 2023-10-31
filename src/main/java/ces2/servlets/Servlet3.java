@@ -29,18 +29,25 @@ public class Servlet3 extends HttpServlet {
 
             String formulario = request.getParameter("formulario");
 
-            if (formulario.equals("accion3")) {
-                if (banco == null) {
-                    request.setAttribute("mensaje", "No existen cuentas");
-                } else {
-                    List<CuentaBancaria> cuentas = new ArrayList<>(banco.getCuentas().values());
+            //if (formulario.equals("accion3")) {
+            if (banco == null) {
+                request.setAttribute("mensaje", "No existen cuentas");
+            } else {
+                request.setAttribute("cuentaMayorBalance", banco.reportGenerator.imprimirCuentaConMayorBalance());
+                request.setAttribute("cuentaMenorBalance", banco.reportGenerator.imprimirCuentaConMenorBalance());
 
-                    CuentaBancaria maxbal = Collections.max(cuentas);
-                    CuentaBancaria minbal = Collections.min(cuentas);
-
-                    request.setAttribute("max", maxbal);
-                    request.setAttribute("min", minbal);
+                request.setAttribute("allCuentas", banco.reportGenerator.imprimirInformacionTodasCuentas());
+            }
+            //}
+            if (formulario.equals("buscarCuenta")) {
+                int numeroCuenta;
+                try {
+                    numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
+                } catch (Exception e) {
+                    numeroCuenta = 0;
                 }
+                String infoCuenta = banco.reportGenerator.imprimirInformacionUnaCuenta(numeroCuenta);
+                request.setAttribute("infoCuenta", infoCuenta);
             }
 
             request.getRequestDispatcher("jsp/reportes.jsp").forward(request, response);

@@ -3,12 +3,16 @@ package ces2.entidades;
 import java.util.HashMap;
 
 public class Banco {
+    public Auditoria auditoria;
     private HashMap<Integer, CuentaBancaria> cuentas;
     private int siguienteCuenta;
+    public ReportGenerator reportGenerator;
 
     public Banco () {
         this.cuentas = new HashMap<>();
         this.siguienteCuenta = 1000;
+        this.reportGenerator = new ReportGenerator(this);
+        this.auditoria = new Auditoria(this);
     }
 
     public int nuevaCuenta(int tipo, boolean esExtranjero) {
@@ -37,13 +41,18 @@ public class Banco {
         cuenta.depositar(cantidad);
     }
 
+    public void retirar(double cantidad, int numeroCuenta) {
+        CuentaBancaria cuenta = cuentas.get(numeroCuenta);
+        cuenta.retirar(cantidad);
+    }
+
     public boolean autorizarPrestamo (double cantidad, int numeroCuenta) {
         CuentaBancaria cuenta = cuentas.get(numeroCuenta);
         if (!cuenta.tieneGarantia(cantidad)) {
             return false;
         }
 
-        cuenta.depositar(cantidad);
+        cuenta.autorizarPrestamo(cantidad);
         return true;
     }
 
@@ -69,21 +78,7 @@ public class Banco {
         cuentaBancaria.setExtranjero(esExtranjero);
     }
 
-    public String imprimirInformacionTodasCuentas () { return "";
-    };
-
-    public String imprimirInformacionUnaCuenta (int numcta) { return "";
-    }
-
-    public String imprimirCuentaConMayorBalance() { return "";
-    };
-
-    public String imprimirCuentaConMenorBalance() { return "";
-    };
-
-    public String mostrarTodosMovimientosCuenta (int numcta) { return "";
-    }
-
-    public String mostrarUltimoMovimientoCuenta (int numcta) { return "";
+    public CuentaBancaria getCuenta (int numeroCuenta) {
+        return cuentas.get(numeroCuenta);
     }
 }

@@ -55,6 +55,25 @@
                 </td>
             </tr>
             <tr>
+                <td>Retirar</td>
+                <td>
+                    <form action="Servlet2" method="POST">
+                        <input type="hidden" name="cuenta" value="${cuenta}" />
+                        <input type="hidden" name="nacionalidad" value="${nacionalidad}" />
+                        <input type="text" name="balance" style="width: 120px;" />
+                        <input type="hidden" name="formulario" value="retirar" />
+                        <input type="submit" value="Enviar" />
+                    </form>
+                </td>
+                <td>
+                    <c:if test="${not empty mensaje4}">
+                        <p style="color: red;">
+                            <c:out value="${mensaje4}" />
+                        </p>
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
                 <td>Autorizar prestamo</td>
                 <td>
                     <form action="Servlet2" method="POST">
@@ -85,15 +104,23 @@
                     </form>
                 </td>
                 <td>
-                    <c:if test="${not empty mensaje2}">
+                    <c:if test="${not empty mensaje3}">
                         <p style="color: red;">
-                            <c:out value="${mensaje2}" />
+                            <c:out value="${mensaje3}" />
                         </p>
                     </c:if>
                 </td>
             </tr>
         </tbody>
     </table>
+    <br />
+    <br />
+
+    <h2>Movimientos</h2>
+    <c:if test="${not empty movimientos}">
+        <p><c:out escapeXml="false" value="${movimientos}" /></p>
+    </c:if>
+
     <br />
     <br />
 

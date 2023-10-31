@@ -1,10 +1,15 @@
 package ces2.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 public class CuentaCorriente implements CuentaBancaria {
 
     private int numeroCuenta;
     private double balance = 0;
     private boolean esExtranjero = false;
+    private Stack<Transaccion> transacciones = new Stack<>();
 
     public CuentaCorriente(int numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
@@ -33,11 +38,55 @@ public class CuentaCorriente implements CuentaBancaria {
     @Override
     public void depositar(double cantidad) {
         balance += cantidad;
+
+        Transaccion transaccion = new Transaccion();
+        transaccion.setTipo(TipoTransaccion.DEPOSITO.getIndex());
+        transaccion.setMonto(cantidad);
+
+        transacciones.push(transaccion);
     }
 
     @Override
     public boolean tieneGarantia(double cantidad) {
         return balance >= 2 * cantidad / 2;
+    }
+
+    @Override
+    public void retirar(double cantidad) {
+        if (balance == 0) return;
+
+        balance = cantidad > balance ? 0 : balance - cantidad;
+
+        Transaccion transaccion = new Transaccion();
+        transaccion.setTipo(TipoTransaccion.RETIRO.getIndex());
+        transaccion.setMonto(Math.min(cantidad, balance));
+
+        transacciones.push(transaccion);
+    }
+
+    @Override
+    public List<Transaccion> getTransacciones() {
+        if (transacciones.empty()) return new ArrayList<>();
+
+        return new ArrayList<>(transacciones);
+    }
+
+    @Override
+    public Transaccion getUltimaTransaccion() {
+        if (transacciones.empty()) return null;
+
+        return transacciones.peek();
+    }
+
+    @Override
+    public void autorizarPrestamo(double cantidad) {
+        this.depositar(cantidad);
+
+        Transaccion transaccion = new Transaccion();
+        transaccion.setTipo(TipoTransaccion.PRESTAMO.getIndex());
+        transaccion.setMonto(cantidad);
+
+        transacciones.push(transaccion);
     }
 
     public String toString() {

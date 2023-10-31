@@ -28,7 +28,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
   <servlet>
     <servlet-name>Servlet3</servlet-name>
-    <servlet-class>ces2.servlets.Servlet2</servlet-class>
+    <servlet-class>ces2.servlets.Servlet3</servlet-class>
   </servlet>
 
   <servlet-mapping>
