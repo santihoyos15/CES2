@@ -1,0 +1,31 @@
+.formulario {
+    float: left;
+    background-color: rebeccapurple;
+}
+
+#form2 {
+    clear: right;
+    margin-left: 2px;
+}
+
+label {
+    color: white;
+    display: inline-block;
+    width: 100px;
+}
+
+fieldset {
+    color: white;
+    border-color: white;
+    border-style: solid;
+    padding: 20px;
+}
+
+input#ingresar, input#limpiar, select, h1 {
+    color: black;
+}
+
+#contenido {
+    width: 60%;
+    margin: 0 auto;
+}

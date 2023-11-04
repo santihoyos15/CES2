@@ -3,50 +3,64 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP Page</title>
+    <link href="./css/estilos1.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="./js/script1.js"></script>
 </head>
 <body>
-<div align="center">
-    <h1>El gran banco</h1>
-    <br />
-    <!-- Formulario para crear una nueva cuenta -->
-    <form action="Servlet1" method="POST">
-        <table border="1" cellpadding="5">
-            <thead>
-                <tr>
-                    <th>Tipo de Cuenta</th>
-                    <th>Nacionalidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <select name="tipo" size="2">
-                            <option value="ahorros" selected>Ahorros</option>
-                            <option value="corriente">Corriente</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="nacionalidad" size="2">
-                            <option value="local" selected>Local</option>
-                            <option value="extranjero">Extraniero</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr colspan="2">
-                    <td>
-                        <input type="hidden" value="accion1" name="formulario" />
-                        <input type="submit" value="Crear Cuenta" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
+    <div id="contenido">
+        <h1>Pide tu carro ya</h1>
+        <form name="form1" action="Servlet1" method="POST" onsubmit="return validarDatos()">
+            <div class="formulario">
+                <fieldset>
+                    <legend>Ingresar Cliente</legend>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" value="" />
+                    <br /><br />
+                    <label for="celular">Celular</label>
+                    <input type="text" id="celular" name="celular" value="" />
+                </fieldset>
+                <br />
+                <span id="mensaje"></span>
+            </div>
+            <div class="formulario" id="form2">
+                <fieldset>
+                    <legend>Ingresar Orden Vehiculo</legend>
+                    <label for="vehiculo">Carros</label>
+                    <select name="vehiculo" id="vehiculo" size="5">
+                        <option value="Volvo" selected>Volvo</option>
+                        <option value="Mercedez">Mercedez</option>
+                        <option value="Audi">Audi</option>
+                        <option value="Jeta">Jeta</option>
+                        <option value="Toyota">Toyota</option>
+                    </select>
+                    <input type="hidden" name="formulario" value="ingresar" />
+                    <input id="ingresar" type="submit" value="Ingresar" name="ingresar" />
+                    <input id="limpiar" type="reset" value="Limpiar">
+                </fieldset>
+            </div>
+        </form>
+        <br />
+        <br />
 
-    <br /> <br />
-    <!-- Formulario para ir a la ventana cuentas.jsp -->
-    <form action="Servlet1" method="POST">
-        <input type="hidden" value="accion2" name="formulario" /> Ir a:<input type="submit" value="Cuentas" />
-    </form>
-</div>
+        <form style="clear: left;" action="Servlet1" method="POST">
+            <input type="hidden" name="formulario" value="accion2" />
+            Ir a: <input type="submit" value="Clientes" />
+        </form>
+
+        <br />
+        <br />
+
+        <form style="clear: left;" action="Servlet2" method="POST">
+            <input type="hidden" name="formulario" value="accion3" />
+            Ir a: <input type="submit" value="Información" />
+        </form>
+
+        <br />
+        <br />
+
+        <form style="clear: left;" action="Servlet3" method="POST">
+            Ir a: <input type="submit" value="Información Clientes" />
+        </form>
+    </div>
 </body>
 </html>

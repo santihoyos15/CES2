@@ -1,7 +1,8 @@
 package ces2.servlets;
 
-import ces2.entidades.Banco;
-import ces2.entidades.CuentaBancaria;
+import ces2.entidades.Carro;
+import ces2.entidades.Cliente;
+import ces2.entidades.Pedido2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,56 +13,24 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-@WebServlet(name = "Servlet2", value = "/Servlet2")
+@WebServlet(name = "Servlet3", value = "/Servlet3")
 public class Servlet3 extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession(true);
 
-            HttpSession sesion = request.getSession();
+            ArrayList<Cliente> pedidosClientes = (ArrayList) session.getAttribute("pedidosClientes");
 
-            Banco banco = (Banco) sesion.getAttribute("banco");
+            Pedido2 pedidos = new Pedido2();
 
-            String formulario = request.getParameter("formulario");
+            request.setAttribute("pedidos", pedidos.procesarDatos(pedidosClientes));
 
-            //if (formulario.equals("accion3")) {
-            if (banco == null) {
-                request.setAttribute("mensaje", "No existen cuentas");
-            } else {
-                request.setAttribute("cuentaMayorBalance", banco.reportGenerator.imprimirCuentaConMayorBalance());
-                request.setAttribute("cuentaMenorBalance", banco.reportGenerator.imprimirCuentaConMenorBalance());
-
-                request.setAttribute("allCuentas", banco.reportGenerator.imprimirInformacionTodasCuentas());
-            }
-            //}
-            if (formulario.equals("buscarCuenta")) {
-                int numeroCuenta;
-                try {
-                    numeroCuenta = Integer.parseInt(request.getParameter("numeroCuenta"));
-                } catch (Exception e) {
-                    numeroCuenta = 0;
-                }
-                String infoCuenta = banco.reportGenerator.imprimirInformacionUnaCuenta(numeroCuenta);
-                request.setAttribute("infoCuenta", infoCuenta);
-            }
-
-            request.getRequestDispatcher("jsp/reportes.jsp").forward(request, response);
+            request.getRequestDispatcher("jsp/info_clientes.jsp").forward(request, response);
         }
-    }
-
-    public boolean isNumber(String strNum) {
-        try {
-            Double.parseDouble(strNum);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        return true;
     }
 
     @Override
