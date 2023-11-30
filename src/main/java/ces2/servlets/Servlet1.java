@@ -1,12 +1,14 @@
 package ces2.servlets;
 
-import ces2.entidades.GetDatos;
+import ces2.entidades.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.*;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @WebServlet(name = "Servlet1", value = "/Servlet1")
 public class Servlet1 extends HttpServlet {
@@ -15,83 +17,115 @@ public class Servlet1 extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
+            String formulario = request.getParameter("formulario");
 
-            String datos = "";
+            if (formulario.equals("index")) {
+                List<String> ganadores = new ArrayList<>();
+                ganadores.add("Maria");
+                ganadores.add("Rodrigo");
+                ganadores.add("Juan");
+                ganadores.add("Pablo");
 
-            int salario = 3;
-             datos = calcularBonus(salario);
+                boolean tengoAJuan = false;
+                String datos = "";;
+                String datos2 = "";;
 
-             String archivo = "sin datos";
+                for (String ganador : ganadores) {
+                    if (ganador.equals("Juan")) {
+                        tengoAJuan = true;
 
-             try {
-                 Class<?> clase = Class.forName("ces2.servlets.Servlet1");
+                        datos = "Estilo imperativo. Juan gano? " + tengoAJuan;
+                        break;
+                    }
+                }
 
-                 Method[] methods = clase.getMethods();
+                datos2 = "Estilo declarativo/funcional. Juan gano? " + ganadores.stream().anyMatch(g -> g.equals("Juan"));
 
-                 for (Method method : methods) {
-                     if (method.isAnnotationPresent(GetDatos.class)) {
-                         GetDatos getDatos = method.getAnnotation(GetDatos.class);
-                         archivo = getDatos.archivo();
-                     }
-                 }
-             } catch (ClassNotFoundException e) {
-                 datos = e.toString();
-             }
+                IndiceMasaCorporal imc = (p, e) -> {
+                    double r = Math.round(p / (e * e));
 
-             if (!archivo.equals("sin datos")) {
-                 try (
-                         FileInputStream myFile = new FileInputStream(archivo);
-                         InputStreamReader inputStreamReader = new InputStreamReader(myFile, "UTF-8");
-                         BufferedReader reader = new BufferedReader(inputStreamReader);
-                 ){
-                     String lectura = "";
+                    if (r < 10.5) {
+                        return "IMC: " + r + " Bajo peso. ";
+                    } else if (r >= 18.5 && r <= 24.9) {
+                        return "IMC: " + r + " Peso normal. ";
+                    } else if (r >= 25.0 && r <= 29.9) {
+                        return "IMC: " + r + " Sobrepeso. ";
+                    } else if (r >= 30) {
+                        return "IMC: " + r + " Obesidad. ";
+                    }
 
-                     while ((lectura = reader.readLine()) != null) {
-                         datos += lectura;
-                     }
-                 } catch (IOException e) {
-                     datos = e.toString();
-                 }
-             }
+                    return "Valor no válido";
+                };
 
-             request.setAttribute("mensaje", datos);
-             request.getRequestDispatcher("index.jsp").forward(request, response);
+                double peso = 73;
+                double estatura = 1.83;
+
+                String calculo = imc.calcularIndice(peso, estatura);
+
+                Impuesto imp1 = new Impuesto();
+                imp1.setIngresoNeto(50000);
+                imp1.calcularImpuesto();
+
+                FuncionalImpuesto funcionalImpuesto = (ingreso) -> {
+                    if (ingreso < 30000) {
+                        return ingreso * 0.05;
+                    }
+                    return ingreso * 0.06;
+                };
+
+                FuncionalImpuesto impuestoPoliticos = (ingreso) -> {
+                    if (ingreso < 30000) {
+                        return ingreso * 0.01;
+                    }
+                    return ingreso * 0.02;
+                };
+
+/*
+                Cliente personaNatural = new Cliente();
+                personaNatural.nombre = "Maria perez";
+                personaNatural.ingresoNeto = 50000;
+
+                Cliente politico = new Cliente();
+                politico.nombre = "Tu politico favorito";
+                politico.ingresoNeto = 100000;
+*/
+
+                Cliente[] clientes = new Cliente[3];
+
+                clientes[0] = new Cliente("John", 'E');
+                clientes[1] = new Cliente("Mary", 'C');
+                clientes[2] = new Cliente("Steven", 'E');
+
+                List<Cliente> clientesList = Arrays.asList(clientes);
+
+                String mensaje = "1. Ejecutando un loop de manera iterativa<br /><br />";
+
+                for (Cliente cli: clientesList) {
+                    if ('E' == cli.getStatus()) {
+                        mensaje += cli.getNombre() + " es empleado <br />";
+                    } else {
+                        mensaje += cli.getNombre() + " es contratista <br />";
+                    }
+                }
+
+                List<String> output = new ArrayList<>();
+                output.add("2. Ejecutando un loop de manera funcional<br /><br />");
+
+                clientesList.forEach(cli -> {
+                    if ('E' == cli.getStatus()) {
+                        output.add(cli.getNombre() + " es empleado <br />");
+                    } else {
+                        output.add(cli.getNombre() + " es contratista <br />");
+                    }
+                });
+
+
+                request.setAttribute("datos", mensaje);
+                request.setAttribute("datos2", output);
+                request.getRequestDispatcher("jsp/pagina2.jsp").forward(request,response);
+            }
         }
     }
-
-    @SuppressWarnings("UnusedAssignment")
-    public String calcularBonus (int salario) {
-        int bonus;
-        String datos = "";
-
-        switch (salario) {
-            case 1:
-                bonus = 1000;
-                datos = "Salario nivel 1.<br /> Dando bonus de: " + bonus;
-                break;
-            case 2:
-                bonus = 2000;
-                datos = "Salario nivel 2.<br /> Dando bonus de: " + bonus;
-                break;
-            case 3:
-                bonus = 6000;
-                datos = "Salario nivel 3.<br /> Dando bonus de: " + bonus;
-            case 4:
-                bonus = 1000;
-                datos = "Salario nivel 4.<br /> Dando bonus de: " + bonus;
-                break;
-            default:
-                datos = "Nivel de salario invalido: " + salario;
-        }
-
-        return datos;
-    }
-
-    @GetDatos(archivo = "C:\\Users\\ASUS\\IdeaProjects\\CES2\\datos.txt")
-    public void getDatos() {
-
-    }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
